@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<IngestRequest>
+	<Email>sample@brightcove.com</Email>
+	<!-- valid file 1 -->
+	<Asset>
+		<FileName>big_buck_bunny_1080p_h264.mov</FileName>
+		<Credentials>
+			<ClientID>123456</ClientID>
+			<ClientSecret>asdfghjkl</ClientSecret>
+			<AccountID>123456</AccountID>
+		</Credentials>
+		<Profile>balanced-high-definition</Profile>
+		<VideoCloudAsset>
+			<Title>Big Buck, s3</Title>
+			<ShortDescription>Testing the watch folder</ShortDescription>
+			<ReferenceID>watch_folder_test</ReferenceID>
+		</VideoCloudAsset>
+		<NotificationEndpoint>http://noficiations.customer.com</NotificationEndpoint>
+	</Asset>
+</IngestRequest>
