@@ -1,0 +1,59 @@
+body {
+  padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+}
+.video-js {
+  /*position: absolute;*/
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+}
+.outer {
+  width: 80%;
+  display: block;
+  position: relative;
+  margin: 20px auto;
+}
+.outer:after {
+  padding-top: 56.25%; /* 16:9 ratio */
+  display: block;
+  content: '';
+}
+.navbar-header > a {
+  padding: 5px;
+}
+@media screen and (min-width: 44em) {
+  .col-group {
+    overflow: hidden;
+  }
+  .col-group > div {
+    float: left;
+    width: 46%;
+  }
+}
+.playerframe {
+  width: 95%;
+  float: left;
+}
+.panel-heading {
+  font-weight: bold;
+}
+#eventHolder {
+  width: 100%;
+  overflow: auto;
+  height: 300px;
+}
+label {
+  display: table-cell;
+  width: 140px;
+}
+input {
+  width: 95%;
+  display: table-cell;
+}
+.holder {
+  display: table;
+  width: 100%;
+}
