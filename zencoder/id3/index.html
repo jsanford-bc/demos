@@ -1,0 +1,50 @@
+<html>
+<head>
+	<title>Testing ID3 metadata</title>
+</head>
+<body>
+	<h2>Testing ID3 metadata - check console</h2>
+	<video
+		data-account="1924997959001"
+		data-player="default"
+		data-embed="default"
+		id="player"
+		width="640px"
+		height="360px"
+		class="video-js" controls></video>
+	<script src="//players.brightcove.net/1924997959001/default_default/index.min.js"></script>
+	<script>
+		videojs('player').ready(function() {
+			var player = this;
+			
+			player.on('loadeddata', function(e) {
+				console.log('loadeddata');
+				
+				player.hls.segmentParser_.metadataStream.on('data', function(metadata) {
+					console.log(metadata);
+				});
+
+				if (player.textTracks().length > 0) {
+					player.textTracks()[0].on('cuechange', function(e) {
+						printLatestCue(player.textTracks()[0]);
+					})
+				}
+				else {
+					player.textTracks().on('addtrack', function(e) {
+						player.textTracks()[0].on('cuechange', function(e) {
+							printLatestCue(player.textTracks()[0]);
+						})
+					});
+				}
+			});
+
+			player.src({type: "application/x-mpegURL", src: "http://bc-jsanford.s3.amazonaws.com/id3-test/master.m3u8"})
+			//player.src({type: "application/x-mpegURL", src: "http://ak-hls-origin-replay.espn.go.com/hls/2015/04/03/ESPN_VIDEO_5S_M3U8_SEC_OVERRIDE_11111_20150403/master_wired_ads.m3u8"})
+		});
+
+		function printLatestCue(track) {
+			if (track.activeCues.length)
+				console.log(track.activeCues[0])
+		}
+	</script>
+</body>
