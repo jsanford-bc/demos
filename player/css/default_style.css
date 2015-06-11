@@ -24,6 +24,9 @@ body {
 .navbar-header > a {
   padding: 5px;
 }
+.navbar-inner > .container > a {
+  padding-top:3px;
+}
 @media screen and (min-width: 44em) {
   .col-group {
     overflow: hidden;
