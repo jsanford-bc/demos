@@ -34,15 +34,15 @@
 				<div class='nav-collapse collapse'>
 					<ul class='nav'>
 						<!-- add your links here like below -->
-						<li class="active"><a href="index.html">Base</a></li>
-						<li><a href="logging.html">Logging</a></li>
+						<li><a href="index.html">Base</a></li>
+						<li class="active"><a href="logging.html">Logging</a></li>
 					</ul>
 				</div><!-- /.nav-collapse -->
 			</div><!-- /.container -->
 		</div><!-- /.navbar-inner -->
 	</div><!-- /.navbar -->
 	<div class='container'>
-		<h1>Default Brightcove Player template</h1>
+		<h1>Default Brightcove Player template w/ logging</h1>
 		<div style='width:100%; margin: 0 auto;'>
 			<div class='outer'>
 				<video
@@ -53,6 +53,25 @@
 					width='100%'
 					height='360px'
 					class='video-js' controls></video>
+				<div id="eventHolder" style="display: inline-block;">
+          <br>
+          <div id="eventPanel" class="panel panel-default">
+            <div class="panel-heading">Brightcove Player Events</div>
+            <div class="table-responsive">
+              <table id="eventTable" class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Event</th>
+                    <th>Time</th>
+                    <th>Current playback time</th>
+                  </tr>
+                </thead>
+                <tbody id="eventTableBody">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
 			</div>
 		</div>
 	</div> <!-- /container -->
@@ -61,8 +80,9 @@
 	<script src='//bcjsanford.com.global.prod.fastly.net/lib/bootstrap/js/bootstrap.min.js'></script>
 	<script src='//players.brightcove.net/1924997959001/default_default/index.min.js'></script>
 	<script>
+		var player, $eventTableBody;
 		videojs('player').ready(function() {
-			var player = this;
+			player = this;
 
 			console.log(player);
 
@@ -78,7 +98,42 @@
 			]);
 
 			player.poster('http://bcjsanford.com.global.prod.fastly.net/demo/thumbnails/Cascada_0015.png');
+
+			$eventTableBody = $('#eventTableBody');
+      var playerEvents = ['play','playing','loadedalldata','loadeddata','loadedmetadata','durationchange','ended','error','firstplay','fullscreenchange','loadstart','pause','progress','timeupdate','volumechange','resize','seeked','seeking'];
+
+      for (key in playerEvents) {
+        player.on(playerEvents[key], logEvent);
+      }
 		});
+
+		function logEvent(evt) {
+		  var date = new Date();
+
+		  var clickTime = {
+		    hours: date.getHours().toString(),
+		    minutes: date.getMinutes().toString(),
+		    seconds: date.getSeconds().toString(),
+		    milliseconds: date.getMilliseconds().toString(),
+		    toString: function() {
+		      return this.hours + ':' + this.minutes + ':' + this.seconds + '.' + this.milliseconds;
+		    }
+		  };
+		  clickTime.hours = clickTime.hours.length == 1 ? '0' + clickTime.hours : clickTime.hours;
+		  clickTime.minutes = clickTime.minutes.length == 1 ? '0' + clickTime.minutes : clickTime.minutes;
+		  clickTime.seconds = clickTime.seconds.length == 1 ? '0' + clickTime.seconds : clickTime.seconds;
+		  clickTime.milliseconds = clickTime.milliseconds.length == 1 ? '0' + clickTime.milliseconds : clickTime.milliseconds;
+		  clickTime.milliseconds = clickTime.milliseconds.length == 2 ? '0' + clickTime.milliseconds : clickTime.milliseconds;
+
+		  var currentPlaybackTime = player.currentTime();
+
+		  $eventTableBody.prepend($('<tr><td>' + evt.type + '</td><td>' + 
+		    clickTime.hours + ':' + 
+		    clickTime.minutes + ':' + 
+		    clickTime.seconds + '.' + 
+		    clickTime.milliseconds + 
+		    '</td><td>' + currentPlaybackTime + '</td></tr>'));
+		}
 	</script>
 </body>
 </html>
