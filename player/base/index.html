@@ -2,7 +2,7 @@
 <html lang='en'>
 <head>
 	<meta charset='utf-8'>
-	<title>IMA3 with VAST 2</title>
+	<title>Template</title>
 	<meta name='viewport' content='width=device-width, initial-scale=1.0'>
 	<meta name='description' content=''>
 	<meta name='author' content=''>
@@ -30,21 +30,19 @@
 					<span class='icon-bar'></span>
 					<span class='icon-bar'></span>
 				</button>
-				<a class='brand' href='/client_demos/espn/index.html'> <img src='//bcjsanford.com.global.prod.fastly.net/lib/bootstrap/img/bc-logo.gif' width='100px'/></a>
+				<a class='brand' href='index.html'> <img src='//bcjsanford.com.global.prod.fastly.net/lib/bootstrap/img/bc-logo.gif' width='100px'/></a>
 				<div class='nav-collapse collapse'>
 					<ul class='nav'>
 						<!-- add your links here like below -->
-						<!--
 						<li class="active"><a href="foo.html">Title</a></li>
 						<li><a href="bar.html">Title</a></li>
-						-->
 					</ul>
 				</div><!-- /.nav-collapse -->
 			</div><!-- /.container -->
 		</div><!-- /.navbar-inner -->
 	</div><!-- /.navbar -->
 	<div class='container'>
-		<h1>Default Brightcove Player with IMA plug-in and VAST 2 ad tag</h1>
+		<h1>Default Brightcove Player template</h1>
 		<div style='width:100%; margin: 0 auto;'>
 			<div class='outer'>
 				<video
@@ -73,6 +71,13 @@
 			$(window).resize(function(event) {
 				player.height(player.width()*9/16);
 			});
+
+			player.src([
+				{type: 'application/x-mpegURL', src: 'http://bcjsanford.com.global.prod.fastly.net/demo/Cascada_trailer/index.m3u8'},
+        		{type: 'video/mp4', src: 'http://bcjsanford.com.global.prod.fastly.net/demo/Cascada_trailer.mp4'}
+			]);
+
+			player.poster('http://bcjsanford.com.global.prod.fastly.net/demo/thumbnails/Cascada_0015.png');
 		});
 	</script>
 </body>
