@@ -3,7 +3,7 @@ import base64, requests, urllib, httplib, urllib3, ssl, json, sys, subprocess, t
 ####################
 # ZENCODER CONFIGS #
 ####################
-ZENCODER_API_KEY = 'ad3d5588379cd68d460fca07c6ab5df4'
+ZENCODER_API_KEY = 'ZENCODER_API_KEY'
 ZENCODER_URL = 'https://app.zencoder.com/api/v2/jobs'
 JOB_REQUEST = {
 	'live_stream': 'true',
