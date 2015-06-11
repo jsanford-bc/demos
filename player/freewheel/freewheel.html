@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+	<meta charset='utf-8'>
+	<title>FreeWheel</title>
+	<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+	<meta name='description' content=''>
+	<meta name='author' content=''>
+
+	<!-- Le styles -->
+	<link href='//bcjsanford.com.global.prod.fastly.net/lib/bootstrap/css/bootstrap.css' rel='stylesheet'>
+	<link href='//bcjsanford.com.global.prod.fastly.net/lib/bootstrap/css/bootstrap-responsive.css' rel='stylesheet'>
+	<link href='../css/default_style.css' rel='stylesheet'>
+	<link href='//players.brightcove.net/videojs-ima3/videojs.ima3.min.css' rel='stylesheet'>
+
+	<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	<script src='../assets/js/html5shiv.js'></script>
+	<![endif]-->
+
+	<!-- Fav and touch icons -->
+	<link rel='apple-touch-icon-precomposed' href='//bcjsanford.com.global.prod.fastly.net/lib/ico/bc-logo.png'>
+	<link rel="shortcut icon" href="//bcjsanford.com.global.prod.fastly.net/lib/ico/favicon.ico">
+</head>
+<body>
+	<div class='navbar navbar-inverse navbar-fixed-top'>
+		<div class='navbar-inner'>
+			<div class='container'>
+				<button type='button' class='btn btn-navbar' data-toggle='collapse' data-target='.nav-collapse'>
+					<span class='icon-bar'></span>
+					<span class='icon-bar'></span>
+					<span class='icon-bar'></span>
+				</button>
+				<a class='brand' href='/client_demos/espn/index.html'> <img src='//bcjsanford.com.global.prod.fastly.net/lib/bootstrap/img/bc-logo.gif' width='100px'/></a>
+				<div class='nav-collapse collapse'>
+					<ul class='nav'>
+						<!-- add your links here like below -->
+						<!--
+						<li class="active"><a href="foo.html">Title</a></li>
+						<li><a href="bar.html">Title</a></li>
+						-->
+					</ul>
+				</div><!-- /.nav-collapse -->
+			</div><!-- /.container -->
+		</div><!-- /.navbar-inner -->
+	</div><!-- /.navbar -->
+	<div class='container'>
+		<h1>Default Brightcove Player with FreeWheel plug-in</h1>
+		<div style='width:100%; margin: 0 auto;'>
+			<div class='outer'>
+				<video
+					data-account='1924997959001'
+					data-player='800bbc5e-9b1c-46e8-aad6-d6f25d47ad07'
+					data-embed='default'
+					id='player'
+					width='100%'
+					height='360px'
+					class='video-js' controls></video>
+			</div>
+		</div>
+	</div> <!-- /container -->
+
+	<script src='//bcjsanford.com.global.prod.fastly.net/lib/bootstrap/js/jquery-1.10.2.min.js'></script>
+	<script src='//bcjsanford.com.global.prod.fastly.net/lib/bootstrap/js/bootstrap.min.js'></script>
+	<script src='//players.brightcove.net/1924997959001/800bbc5e-9b1c-46e8-aad6-d6f25d47ad07_default/index.min.js'></script>
+	<script src='//players.brightcove.net/videojs-ima3/videojs.ima3.min.js'></script>
+	<script>
+		videojs('player').ready(function() {
+			var player = this;
+
+			player.FreeWheelPlugin({
+	      "Flash": {
+        "networkId": 90750,
+        "profile": "3pqa_profile",
+        "sdkurl": "http://adm.fwmrm.net/p/release/latest-AS3/adm/dbg/AdManager.swf",
+        "serverUrl": "http://cue.v.fwmrm.net/ad/g/1",
+        "siteSectionCustomId": "as3_demo_site_section",
+        "temporalSlots": [{
+          "adUnit": "preroll",
+          "id": "Preroll_1",
+          "timePosition": 0
+        }, {
+          "adUnit": "postroll",
+          "id": "Postroll_1",
+          "timePosition": 60
+        }, {
+          "adUnit": "midroll",
+          "id": "Midroll_1",
+          "timePosition": 5
+        }],
+        "videoAssetCustomId": "as3_demo_video_asset",
+        "videoAssetDuration": 500
+	      },
+	      "Html5": {
+	        "keyValues": [{
+	          "feature": "simpleAds",
+	          "module": "DemoPlayer"
+	        }, {
+	          "feature": "trackingURLs"
+	        }],
+	        "networkId": 96749,
+	        "profile": "global-js",
+	        "sdkurl": "http://adm.fwmrm.net/p/release/5.5.0-JS/adm/prd/AdManager.js",
+	        "serverUrl": "http://cue.v.fwmrm.net/ad/g/1",
+	        "siteSectionCustomId": "DemoSiteGroup.01",
+	        "temporalSlots": [{
+	          "adUnit": "preroll",
+	          "id": "Preroll_1",
+	          "timePosition": 0
+	        }, {
+	          "adUnit": "postroll",
+	          "id": "Postroll_1",
+	          "timePosition": 60
+	        }, {
+	          "adUnit": "midroll",
+	          "id": "Midroll_1",
+	          "timePosition": 5
+	        }],
+	        "videoAssetCustomId": "DemoVideoGroup.01",
+	        "videoAssetDuration": 500
+	      },
+	      "adTechOrder": [
+	        "flash",
+	        "html5"
+	      ],
+	      "debug": true,
+	      "prerollTimeout": 1000,
+	      "timeout": 5000
+			});
+
+			player.src([
+				{type: 'application/x-mpegURL', src: 'http://bcjsanford.com.global.prod.fastly.net/demo/Cascada_trailer/index.m3u8'},
+        		{type: 'video/mp4', src: 'http://bcjsanford.com.global.prod.fastly.net/demo/Cascada_trailer.mp4'}
+			]);
+
+			player.poster('http://bcjsanford.com.global.prod.fastly.net/demo/thumbnails/Cascada_0015.png');
+
+			player.height(player.width()*9/16);
+
+			$(window).resize(function(event) {
+				player.height(player.width()*9/16);
+			});
+		});
+	</script>
+</body>
+</html>
